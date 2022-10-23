@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "Fielder/version"
+require_relative "fielder/version"
 
 module Fielder
   class Error < StandardError; end

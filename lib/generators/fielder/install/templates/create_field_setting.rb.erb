@@ -1,0 +1,13 @@
+class CreateFieldSetting < ActiveRecord::Migration<%= migration_version %>
+  def change
+    create_table :field_settings do |t|
+      t.references :field_model, null: false, foreign_key: true
+      t.string :name
+      t.string :code
+      t.integer :rank
+      t.boolean :display, null: false, default: true
+
+      t.timestamps
+    end
+  end
+end
