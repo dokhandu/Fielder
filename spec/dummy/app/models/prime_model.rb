@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+class PrimeModel < ApplicationRecord
+  belongs_to :modelable, polymorphic: true
+  has_many :field_models, dependent: :destroy
+
+  accepts_nested_attributes_for :field_models, allow_destroy: true
+end

@@ -1,0 +1,778 @@
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddTestTable (20221024062953)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "prime_model"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "prime_model" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "modelable_type" varchar, "modelable_id" integer, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_prime_model_on_modelable" ON "prime_model" ("modelable_type", "modelable_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_model"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_model" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "prime_model_id" integer NOT NULL, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_14a0d5147c"
+FOREIGN KEY ("prime_model_id")
+  REFERENCES "prime_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_model_on_prime_model_id" ON "field_model" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_setting"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_setting" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "field_model_id" integer NOT NULL, "name" varchar, "code" varchar, "rank" integer, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_3507962994"
+FOREIGN KEY ("field_model_id")
+  REFERENCES "field_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_setting_on_field_model_id" ON "field_setting" ("field_model_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221024062953"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-10-24 06:41:24.545407"], ["updated_at", "2022-10-24 06:41:24.545407"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddTestTable (20221024062953)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "prime_models"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "prime_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "modelable_type" varchar, "modelable_id" integer, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_prime_models_on_modelable" ON "prime_models" ("modelable_type", "modelable_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_models"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "prime_model_id" integer NOT NULL, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_af9833942b"
+FOREIGN KEY ("prime_model_id")
+  REFERENCES "prime_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_models_on_prime_model_id" ON "field_models" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "field_model_id" integer NOT NULL, "name" varchar, "code" varchar, "rank" integer, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f994ea24a7"
+FOREIGN KEY ("field_model_id")
+  REFERENCES "field_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_settings_on_field_model_id" ON "field_settings" ("field_model_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221024062953"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-10-24 06:42:58.725918"], ["updated_at", "2022-10-24 06:42:58.725918"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_models"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "field_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "prime_model_id" integer NOT NULL, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_field_models_on_prime_model_id" ON "field_models" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_settings"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "field_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "field_model_id" integer NOT NULL, "name" varchar, "code" varchar, "rank" integer, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_field_settings_on_field_model_id" ON "field_settings" ("field_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "prime_models"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "prime_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "modelable_type" varchar, "modelable_id" integer, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_prime_models_on_modelable" ON "prime_models" ("modelable_type", "modelable_id")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "afield_models" ("id" integer NOT NULL PRIMARY KEY, "prime_model_id" integer NOT NULL, "name" varchar DEFAULT NULL, "code" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_afield_models_on_prime_model_id" ON "afield_models" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "afield_models" ("id","prime_model_id","name","code","created_at","updated_at")
+                     SELECT "id","prime_model_id","name","code","created_at","updated_at" FROM "field_models"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "field_models"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_models" ("id" integer NOT NULL PRIMARY KEY, "prime_model_id" integer NOT NULL, "name" varchar DEFAULT NULL, "code" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_af9833942b"
+FOREIGN KEY ("prime_model_id")
+  REFERENCES "prime_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_models_on_prime_model_id" ON "field_models" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "field_models" ("id","prime_model_id","name","code","created_at","updated_at")
+                     SELECT "id","prime_model_id","name","code","created_at","updated_at" FROM "afield_models"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "afield_models"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "afield_settings" ("id" integer NOT NULL PRIMARY KEY, "field_model_id" integer NOT NULL, "name" varchar DEFAULT NULL, "code" varchar DEFAULT NULL, "rank" integer DEFAULT NULL, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_afield_settings_on_field_model_id" ON "afield_settings" ("field_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "afield_settings" ("id","field_model_id","name","code","rank","display","created_at","updated_at")
+                     SELECT "id","field_model_id","name","code","rank","display","created_at","updated_at" FROM "field_settings"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "field_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_settings" ("id" integer NOT NULL PRIMARY KEY, "field_model_id" integer NOT NULL, "name" varchar DEFAULT NULL, "code" varchar DEFAULT NULL, "rank" integer DEFAULT NULL, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f994ea24a7"
+FOREIGN KEY ("field_model_id")
+  REFERENCES "field_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_settings_on_field_model_id" ON "field_settings" ("field_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "field_settings" ("id","field_model_id","name","code","rank","display","created_at","updated_at")
+                     SELECT "id","field_model_id","name","code","rank","display","created_at","updated_at" FROM "afield_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "afield_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20221024062953)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-10-24 06:49:04.272076"], ["updated_at", "2022-10-24 06:49:04.272076"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "e639e4f12cb4b1297ccbb5955005088044d0965d"], ["created_at", "2022-10-24 06:49:04.274590"], ["updated_at", "2022-10-24 06:49:04.274590"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_models"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "field_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "prime_model_id" integer NOT NULL, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_field_models_on_prime_model_id" ON "field_models" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_settings"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "field_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "field_model_id" integer NOT NULL, "name" varchar, "code" varchar, "rank" integer, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_field_settings_on_field_model_id" ON "field_settings" ("field_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "prime_models"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "prime_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "modelable_type" varchar, "modelable_id" integer, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_prime_models_on_modelable" ON "prime_models" ("modelable_type", "modelable_id")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "afield_models" ("id" integer NOT NULL PRIMARY KEY, "prime_model_id" integer NOT NULL, "name" varchar DEFAULT NULL, "code" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_afield_models_on_prime_model_id" ON "afield_models" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "afield_models" ("id","prime_model_id","name","code","created_at","updated_at")
+                     SELECT "id","prime_model_id","name","code","created_at","updated_at" FROM "field_models"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "field_models"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_models" ("id" integer NOT NULL PRIMARY KEY, "prime_model_id" integer NOT NULL, "name" varchar DEFAULT NULL, "code" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_af9833942b"
+FOREIGN KEY ("prime_model_id")
+  REFERENCES "prime_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_models_on_prime_model_id" ON "field_models" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "field_models" ("id","prime_model_id","name","code","created_at","updated_at")
+                     SELECT "id","prime_model_id","name","code","created_at","updated_at" FROM "afield_models"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "afield_models"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TEMPORARY TABLE "afield_settings" ("id" integer NOT NULL PRIMARY KEY, "field_model_id" integer NOT NULL, "name" varchar DEFAULT NULL, "code" varchar DEFAULT NULL, "rank" integer DEFAULT NULL, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_afield_settings_on_field_model_id" ON "afield_settings" ("field_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "afield_settings" ("id","field_model_id","name","code","rank","display","created_at","updated_at")
+                     SELECT "id","field_model_id","name","code","rank","display","created_at","updated_at" FROM "field_settings"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "field_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_settings" ("id" integer NOT NULL PRIMARY KEY, "field_model_id" integer NOT NULL, "name" varchar DEFAULT NULL, "code" varchar DEFAULT NULL, "rank" integer DEFAULT NULL, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f994ea24a7"
+FOREIGN KEY ("field_model_id")
+  REFERENCES "field_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_settings_on_field_model_id" ON "field_settings" ("field_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "field_settings" ("id","field_model_id","name","code","rank","display","created_at","updated_at")
+                     SELECT "id","field_model_id","name","code","rank","display","created_at","updated_at" FROM "afield_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "afield_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20221024062953)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-10-24 06:49:04.292204"], ["updated_at", "2022-10-24 06:49:04.292204"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = ?, "updated_at" = ? WHERE "ar_internal_metadata"."key" = ?[0m  [["value", "test"], ["updated_at", "2022-10-24 06:49:04.293733"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "e639e4f12cb4b1297ccbb5955005088044d0965d"], ["created_at", "2022-10-24 06:49:04.295228"], ["updated_at", "2022-10-24 06:49:04.295228"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddTestTable (20221024062953)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "prime_models"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "prime_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "modelable_type" varchar, "modelable_id" integer, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_prime_models_on_modelable" ON "prime_models" ("modelable_type", "modelable_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_models"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "prime_model_id" integer NOT NULL, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_af9833942b"
+FOREIGN KEY ("prime_model_id")
+  REFERENCES "prime_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_models_on_prime_model_id" ON "field_models" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "field_model_id" integer NOT NULL, "name" varchar, "code" varchar, "rank" integer, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f994ea24a7"
+FOREIGN KEY ("field_model_id")
+  REFERENCES "field_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_settings_on_field_model_id" ON "field_settings" ("field_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221024062953"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-10-24 06:51:05.809422"], ["updated_at", "2022-10-24 06:51:05.809422"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["first_name", "dorji"], ["last_name", "khandu"], ["created_at", "2022-10-24 06:51:55.172682"], ["updated_at", "2022-10-24 06:51:55.172682"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddTestTable (20221024062953)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "prime_models"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "prime_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "modelable_type" varchar, "modelable_id" integer, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_prime_models_on_modelable" ON "prime_models" ("modelable_type", "modelable_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_models"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "prime_model_id" integer NOT NULL, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_af9833942b"
+FOREIGN KEY ("prime_model_id")
+  REFERENCES "prime_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_models_on_prime_model_id" ON "field_models" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "field_model_id" integer NOT NULL, "name" varchar, "code" varchar, "rank" integer, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f994ea24a7"
+FOREIGN KEY ("field_model_id")
+  REFERENCES "field_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_settings_on_field_model_id" ON "field_settings" ("field_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221024062953"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-10-24 06:56:58.679355"], ["updated_at", "2022-10-24 06:56:58.679355"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["first_name", "dorji"], ["last_name", "khandu"], ["created_at", "2022-10-24 06:57:07.132271"], ["updated_at", "2022-10-24 06:57:07.132271"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.2ms)[0m  [1m[32mINSERT INTO "prime_models" ("modelable_type", "modelable_id", "name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["modelable_type", "User"], ["modelable_id", 1], ["name", "Quote"], ["code", "quote"], ["created_at", "2022-10-24 06:58:35.272971"], ["updated_at", "2022-10-24 06:58:35.272971"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPrimeModel Load (0.2ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" WHERE "prime_models"."modelable_id" = ? AND "prime_models"."modelable_type" = ?[0m  [["modelable_id", 1], ["modelable_type", "User"]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPrimeModel Load (0.1ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" WHERE "prime_models"."modelable_id" = ? AND "prime_models"."modelable_type" = ? ORDER BY "prime_models"."id" ASC LIMIT ?[0m  [["modelable_id", 1], ["modelable_type", "User"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPrimeModel Load (0.1ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" WHERE "prime_models"."modelable_id" = ? AND "prime_models"."modelable_type" = ? ORDER BY "prime_models"."id" ASC LIMIT ?[0m  [["modelable_id", 1], ["modelable_type", "User"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPrimeModel Load (0.0ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" WHERE "prime_models"."modelable_id" = ? AND "prime_models"."modelable_type" = ? ORDER BY "prime_models"."id" ASC LIMIT ?[0m  [["modelable_id", 1], ["modelable_type", "User"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFieldModel Create (0.3ms)[0m  [1m[32mINSERT INTO "field_models" ("prime_model_id", "name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["prime_model_id", 1], ["name", "Request Type"], ["code", "request_type"], ["created_at", "2022-10-24 07:01:11.238502"], ["updated_at", "2022-10-24 07:01:11.238502"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPrimeModel Load (0.1ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" WHERE "prime_models"."modelable_id" = ? AND "prime_models"."modelable_type" = ? ORDER BY "prime_models"."id" ASC LIMIT ?[0m  [["modelable_id", 1], ["modelable_type", "User"], ["LIMIT", 1]]
+  [1m[36mFieldModel Load (0.2ms)[0m  [1m[34mSELECT "field_models".* FROM "field_models" WHERE "field_models"."prime_model_id" = ? ORDER BY "field_models"."id" ASC LIMIT ?[0m  [["prime_model_id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPrimeModel Load (0.1ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" WHERE "prime_models"."modelable_id" = ? AND "prime_models"."modelable_type" = ? ORDER BY "prime_models"."id" ASC LIMIT ?[0m  [["modelable_id", 1], ["modelable_type", "User"], ["LIMIT", 1]]
+  [1m[36mFieldModel Load (0.1ms)[0m  [1m[34mSELECT "field_models".* FROM "field_models" WHERE "field_models"."prime_model_id" = ? ORDER BY "field_models"."id" ASC LIMIT ?[0m  [["prime_model_id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFieldSetting Create (0.5ms)[0m  [1m[32mINSERT INTO "field_settings" ("field_model_id", "name", "code", "rank", "display", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["field_model_id", 1], ["name", "request_type"], ["code", "Request Type"], ["rank", 1], ["display", 1], ["created_at", "2022-10-24 07:03:21.249633"], ["updated_at", "2022-10-24 07:03:21.249633"]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mFieldSetting Load (0.1ms)[0m  [1m[34mSELECT "field_settings".* FROM "field_settings" ORDER BY "field_settings"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mFieldSetting Load (0.1ms)[0m  [1m[34mSELECT "field_settings".* FROM "field_settings" ORDER BY "field_settings"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mFieldSetting Load (0.1ms)[0m  [1m[34mSELECT "field_settings".* FROM "field_settings" ORDER BY "field_settings"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mFieldModel Load (2.4ms)[0m  [1m[34mSELECT "field_models".* FROM "field_models" WHERE "field_models"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mFieldSetting Load (0.2ms)[0m  [1m[34mSELECT "field_settings".* FROM "field_settings" ORDER BY "field_settings"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mFieldModel Load (0.2ms)[0m  [1m[34mSELECT "field_models".* FROM "field_models" WHERE "field_models"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPrimeModel Load (0.1ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" WHERE "prime_models"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mFieldSetting Load (0.2ms)[0m  [1m[34mSELECT "field_settings".* FROM "field_settings" ORDER BY "field_settings"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mFieldModel Load (0.1ms)[0m  [1m[34mSELECT "field_models".* FROM "field_models" WHERE "field_models"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPrimeModel Load (0.1ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" WHERE "prime_models"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mFieldSetting Load (0.1ms)[0m  [1m[34mSELECT "field_settings".* FROM "field_settings" ORDER BY "field_settings"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mFieldModel Load (0.0ms)[0m  [1m[34mSELECT "field_models".* FROM "field_models" WHERE "field_models"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPrimeModel Load (0.0ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" WHERE "prime_models"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Destroy (0.7ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mPrimeModel Load (0.3ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" ORDER BY "prime_models"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPrimeModel Load (0.1ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" ORDER BY "prime_models"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFieldModel Load (0.2ms)[0m  [1m[34mSELECT "field_models".* FROM "field_models" WHERE "field_models"."prime_model_id" = ?[0m  [["prime_model_id", 1]]
+  [1m[36mFieldSetting Load (0.1ms)[0m  [1m[34mSELECT "field_settings".* FROM "field_settings" WHERE "field_settings"."field_model_id" = ?[0m  [["field_model_id", 1]]
+  [1m[36mFieldSetting Destroy (0.4ms)[0m  [1m[31mDELETE FROM "field_settings" WHERE "field_settings"."id" = ?[0m  [["id", 1]]
+  [1m[36mFieldModel Destroy (0.1ms)[0m  [1m[31mDELETE FROM "field_models" WHERE "field_models"."id" = ?[0m  [["id", 1]]
+  [1m[36mPrimeModel Destroy (0.1ms)[0m  [1m[31mDELETE FROM "prime_models" WHERE "prime_models"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mFieldModel Load (0.3ms)[0m  [1m[34mSELECT "field_models".* FROM "field_models" ORDER BY "field_models"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mFieldSetting Load (0.2ms)[0m  [1m[34mSELECT "field_settings".* FROM "field_settings" ORDER BY "field_settings"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.5ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 07:30:52.912991"], ["updated_at", "2022-10-24 07:30:52.912991"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from require at bin/rails:4)
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mPrimeModel Load (0.3ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" ORDER BY "prime_models"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from require at bin/rails:4)
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from require at bin/rails:4)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ (pry):3:in `migrate'
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ (pry):4:in `migrate'
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  ↳ (pry):4:in `migrate'
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ (pry):4:in `migrate'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ (pry):4:in `migrate'
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-10-24 09:37:51.487688"], ["updated_at", "2022-10-24 09:37:51.487688"]]
+  ↳ (pry):4:in `migrate'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ (pry):4:in `migrate'
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mApplicationRecord Delete All (1.2ms)[0m  [1m[31mDELETE FROM ""[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ (pry):3:in `migrate'
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ (pry):4:in `migrate'
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from require at bin/rails:4)
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddTestTable (20221024062953)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "prime_models"[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "prime_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "modelable_type" varchar, "modelable_id" integer, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_prime_models_on_modelable" ON "prime_models" ("modelable_type", "modelable_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_models"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_models" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "prime_model_id" integer NOT NULL, "name" varchar, "code" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_af9833942b"
+FOREIGN KEY ("prime_model_id")
+  REFERENCES "prime_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_models_on_prime_model_id" ON "field_models" ("prime_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "field_settings"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "field_settings" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "field_model_id" integer NOT NULL, "name" varchar, "code" varchar, "rank" integer, "display" boolean DEFAULT 1 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f994ea24a7"
+FOREIGN KEY ("field_model_id")
+  REFERENCES "field_models" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_field_settings_on_field_model_id" ON "field_settings" ("field_model_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221024062953"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.5ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 09:43:59.628007"], ["updated_at", "2022-10-24 09:43:59.628007"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mPrimeModel Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "prime_models"[0m
+  ↳ (pry):1:in `block (3 levels) in <top (required)>'
+  [1m[36mApplicationRecord Delete All (0.7ms)[0m  [1m[31mDELETE FROM ""[0m
+  ↳ (pry):2:in `each'
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.3ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 09:46:39.239253"], ["updated_at", "2022-10-24 09:46:39.239253"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mshow tables[0m
+  ↳ (pry):2:in `clean'
+  [1m[36mPrimeModel Load (0.3ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" ORDER BY "prime_models"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ (pry):12:in `clean'
+  [1m[35m (0.6ms)[0m  [1m[35mTRUNCATE schema_migrations[0m
+  ↳ (pry):17:in `block in clean'
+  [1m[35m (1.6ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  ↳ (pry):21:in `block in clean'
+  [1m[35m (0.7ms)[0m  [1m[31mDelete from prime_models[0m
+  ↳ (pry):21:in `block in clean'
+  [1m[35m (0.0ms)[0m  [1m[31mDelete from field_models[0m
+  ↳ (pry):21:in `block in clean'
+  [1m[35m (0.0ms)[0m  [1m[31mDelete from field_settings[0m
+  ↳ (pry):21:in `block in clean'
+  [1m[35m (0.6ms)[0m  [1m[31mDelete from users[0m
+  ↳ (pry):21:in `block in clean'
+  [1m[36mPrimeModel Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "prime_models"[0m
+  ↳ (pry):22:in `clean'
+  [1m[35m (0.7ms)[0m  [1m[35mshow tables[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.3ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 09:59:36.463981"], ["updated_at", "2022-10-24 09:59:36.463981"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (1.5ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (1.5ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (0.9ms)[0m  [1m[31mDelete from users[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from require at bin/rails:4)
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mPrimeModel Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "prime_models"[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.8ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:00:18.935539"], ["updated_at", "2022-10-24 10:00:18.935539"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[36mcommit transaction[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from require at bin/rails:4)
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mPrimeModel Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "prime_models"[0m
+  [1m[35m (2.3ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (1.3ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (1.0ms)[0m  [1m[31mDelete from users[0m
+  [1m[36mPrimeModel Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "prime_models"[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from require at bin/rails:4)
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.5ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:04:28.322482"], ["updated_at", "2022-10-24 10:04:28.322482"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (1.4ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (1.8ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (1.1ms)[0m  [1m[31mDelete from users[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.5ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:04:30.743125"], ["updated_at", "2022-10-24 10:04:30.743125"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (2.0ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (1.4ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (0.8ms)[0m  [1m[31mDelete from users[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.4ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:04:48.178919"], ["updated_at", "2022-10-24 10:04:48.178919"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (2.6ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (1.7ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (1.1ms)[0m  [1m[31mDelete from users[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.4ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:05:01.366830"], ["updated_at", "2022-10-24 10:05:01.366830"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.3ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:06:41.032112"], ["updated_at", "2022-10-24 10:06:41.032112"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (1.5ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (0.9ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.2ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (1.0ms)[0m  [1m[31mDelete from users[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.4ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:06:43.599040"], ["updated_at", "2022-10-24 10:06:43.599040"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (2.0ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (1.3ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.3ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (1.1ms)[0m  [1m[31mDelete from users[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.4ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Variant"], ["code", "variant"], ["created_at", "2022-10-24 10:07:43.078285"], ["updated_at", "2022-10-24 10:07:43.078285"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.7ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:07:43.093821"], ["updated_at", "2022-10-24 10:07:43.093821"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (1.6ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (2.1ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (1.1ms)[0m  [1m[31mDelete from users[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.7ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:07:46.544379"], ["updated_at", "2022-10-24 10:07:46.544379"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mPrimeModel Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "prime_models"[0m
+  ↳ (pry):1:in `block (4 levels) in <top (required)>'
+  [1m[36mPrimeModel Load (0.3ms)[0m  [1m[34mSELECT "prime_models".* FROM "prime_models" ORDER BY "prime_models"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ (pry):2:in `block (4 levels) in <top (required)>'
+  [1m[35m (2.0ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (1.2ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.3ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (1.3ms)[0m  [1m[31mDelete from users[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.4ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Variant"], ["code", "variant"], ["created_at", "2022-10-24 10:08:40.849027"], ["updated_at", "2022-10-24 10:08:40.849027"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.2ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:08:40.865276"], ["updated_at", "2022-10-24 10:08:40.865276"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.7ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:08:44.194511"], ["updated_at", "2022-10-24 10:08:44.194511"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mPrimeModel Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "prime_models"[0m
+  ↳ (pry):1:in `clean'
+  [1m[35m (4.8ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (1.9ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.1ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (1.1ms)[0m  [1m[31mDelete from users[0m
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <top (required)> at /Users/dorjikhandu/works/fielder/spec/dummy/app/models/application_record.rb:1)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.6ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:13:32.877554"], ["updated_at", "2022-10-24 10:13:32.877554"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPrimeModel Create (0.2ms)[0m  [1m[32mINSERT INTO "prime_models" ("name", "code", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Quote"], ["code", "code"], ["created_at", "2022-10-24 10:13:32.887696"], ["updated_at", "2022-10-24 10:13:32.887696"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[31mDelete from ar_internal_metadata[0m
+  [1m[35m (0.5ms)[0m  [1m[31mDelete from prime_models[0m
+  [1m[35m (0.0ms)[0m  [1m[31mDelete from field_models[0m
+  [1m[35m (0.0ms)[0m  [1m[31mDelete from field_settings[0m
+  [1m[35m (0.5ms)[0m  [1m[31mDelete from users[0m
