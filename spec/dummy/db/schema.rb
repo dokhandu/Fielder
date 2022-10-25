@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_221_024_062_953) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_24_062953) do
   create_table "field_models", force: :cascade do |t|
     t.integer "prime_model_id", null: false
     t.string "name"
@@ -40,7 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 20_221_024_062_953) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index %w[modelable_type modelable_id], name: "index_prime_models_on_modelable"
+    t.index ["modelable_type", "modelable_id"], name: "index_prime_models_on_modelable"
   end
 
   create_table "users", force: :cascade do |t|
