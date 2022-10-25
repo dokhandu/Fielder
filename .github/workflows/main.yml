@@ -15,4 +15,4 @@ jobs:
     - name: Run the default task
       run: |
         RAILS_ENV=test cd spec/dummy/ && bundle exec rake db:drop db:create db:schema:load
-        RAILS_ENV=test bundle exec rspec
+        RAILS_ENV=test cd ../../ bundle exec rspec
