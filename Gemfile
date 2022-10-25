@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in Fielder.gemspec
+# Specify your gem's dependencies in fielder.gemspec
 gemspec
 
 gem "rake", "~> 13.0"
