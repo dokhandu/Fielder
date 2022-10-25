@@ -12,4 +12,3 @@ RSpec.describe PrimeModel, type: :model do
     end
   end
 end
-

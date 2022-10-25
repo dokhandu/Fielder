@@ -14,7 +14,6 @@ module Generators
 
         source_root File.expand_path("templates", __dir__)
 
-
         MODELS = %w[create_prime_model create_field_model create_field_setting].freeze
 
         def self.next_migration_number(dirname)
@@ -28,4 +27,3 @@ module Generators
     end
   end
 end
-

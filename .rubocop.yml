@@ -1,4 +1,14 @@
 AllCops:
+  Exclude:
+    - '.git/**/*'
+    - 'bin/**/*'
+    - 'coverage/**/*'
+    - 'spec/dummy/db/**/*'
+    - 'spec/dummy/log/**/*'
+    - 'spec/dummy/tmp/**/*'
+    - 'spec/dummy/config/puma.rb'
+    - 'spec/dummy/config/environments/test.rb'
+    - 'spec/dummy/bin/bundle'
   TargetRubyVersion: 2.4
 
 Style/StringLiterals:
@@ -11,3 +21,7 @@ Style/StringLiteralsInInterpolation:
 
 Layout/LineLength:
   Max: 120
+
+
+Style/FormatStringToken:
+  Enabled: false
