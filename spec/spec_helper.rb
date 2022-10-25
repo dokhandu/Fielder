@@ -3,7 +3,6 @@
 require "fielder"
 require "pry"
 
-
 require File.expand_path("dummy/config/environment", __dir__)
 require_relative "support/fielder_spec_migrator"
 
@@ -26,5 +25,3 @@ RSpec.configure do |config|
     ::FielderSpecMigrator.new.clean
   end
 end
-
-

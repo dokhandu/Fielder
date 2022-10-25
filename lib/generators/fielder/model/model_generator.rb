@@ -13,7 +13,6 @@ module Generators
 
         source_root File.expand_path("templates", __dir__)
 
-
         MODELS = %w[prime_model field_model field_setting].freeze
 
         def create_model_classes
@@ -23,4 +22,3 @@ module Generators
     end
   end
 end
-
