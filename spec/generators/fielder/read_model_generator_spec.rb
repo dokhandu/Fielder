@@ -24,8 +24,12 @@ RSpec.describe ::Fielder::ReadModelGenerator, type: :generator do # rubocop:disa
             directory("models") do
               file("prime_model_list.rb") do
                 contains("class PrimeModelList < ActiveRecord::Base")
+                contains("self.primary_key = :setting_id")
                 contains "def self.refresh"
                 contains "Scenic.database.refresh_materialized_view(table_name, concurrently: false, cascade: false)"
+                contains "end"
+                contains "def readonly?"
+                contains "true"
               end
             end
           end
