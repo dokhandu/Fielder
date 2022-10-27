@@ -17,10 +17,6 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  # config.before do
-  #   ::FielderSpecMigrator.new.migrate
-  # end
-
   config.after(:suite) do
     ::FielderSpecMigrator.new.clean
   end

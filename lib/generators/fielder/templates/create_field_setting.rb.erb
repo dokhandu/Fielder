@@ -1,6 +1,6 @@
 class CreateFieldSetting < ActiveRecord::Migration<%= migration_version %>
   def change
-    create_table :field_settings do |t|
+    create_table :field_settings, force: :cascade do |t|
       t.references :field_model, null: false, foreign_key: true
       t.string :name
       t.string :code

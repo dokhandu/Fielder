@@ -39,6 +39,7 @@ Gem::Specification.new do |spec|
   # guide at: https://bundler.io/guides/creating_gem.html
 
   spec.add_dependency "activerecord"
+  spec.add_dependency "scenic"
 
   spec.add_development_dependency "debug"
   spec.add_development_dependency "generator_spec"
