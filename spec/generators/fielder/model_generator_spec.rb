@@ -2,9 +2,9 @@
 
 require "spec_helper"
 require "generator_spec/test_case"
-require "generators/fielder/model/model_generator"
+require "generators/fielder/model_generator"
 
-RSpec.describe ::Generators::Fielder::Model::ModelGenerator, type: :generator do # rubocop:disable Metrics/BlockLength
+RSpec.describe ::Fielder::ModelGenerator, type: :generator do # rubocop:disable Metrics/BlockLength
   include GeneratorSpec::TestCase
   destination File.expand_path("tmp", __dir__)
 
@@ -24,7 +24,7 @@ RSpec.describe ::Generators::Fielder::Model::ModelGenerator, type: :generator do
             directory("models") do
               file("prime_model.rb") do
                 contains("class PrimeModel < ActiveRecord::Base")
-                contains "belongs_to :prime_modelable, polymorphic: true"
+                contains "belongs_to :modelable, polymorphic: true"
                 contains "has_many :field_models, dependent: :destroy"
                 contains "accepts_nested_attributes_for :field_models, allow_destroy: true"
               end

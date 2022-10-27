@@ -2,9 +2,9 @@
 
 require "spec_helper"
 require "generator_spec/test_case"
-require "generators/fielder/install/install_generator"
+require "generators/fielder/install_generator"
 
-RSpec.describe ::Generators::Fielder::Install::InstallGenerator, type: :generator do # rubocop:disable Metrics/BlockLength
+RSpec.describe ::Fielder::InstallGenerator, type: :generator do # rubocop:disable Metrics/BlockLength
   include GeneratorSpec::TestCase
   destination File.expand_path("tmp", __dir__)
 
@@ -31,7 +31,7 @@ RSpec.describe ::Generators::Fielder::Install::InstallGenerator, type: :generato
               migration("create_prime_model") do
                 contains("class CreatePrimeModel < #{expected_parent_class}")
                 contains "def change"
-                contains "create_table :prime_models do |t|"
+                contains "create_table :prime_models, force: :cascade do |t|"
                 contains "t.references :modelable, polymorphic: true, index: true"
                 contains "t.string :name"
                 contains "t.string :code"
@@ -50,7 +50,7 @@ RSpec.describe ::Generators::Fielder::Install::InstallGenerator, type: :generato
               migration("create_field_model") do
                 contains("class CreateFieldModel < #{expected_parent_class}")
                 contains "def change"
-                contains "create_table :field_models do |t|"
+                contains "create_table :field_models, force: :cascade do |t|"
                 contains "t.references :prime_model, null: false, foreign_key: true"
                 contains "t.string :name"
                 contains "t.string :code"
@@ -69,7 +69,7 @@ RSpec.describe ::Generators::Fielder::Install::InstallGenerator, type: :generato
               migration("create_field_setting") do
                 contains("class CreateFieldSetting < #{expected_parent_class}")
                 contains "def change"
-                contains "create_table :field_settings do |t|"
+                contains "create_table :field_settings, force: :cascade do |t|"
                 contains "t.references :field_model, null: false, foreign_key: true"
                 contains "t.string :name"
                 contains "t.string :code"

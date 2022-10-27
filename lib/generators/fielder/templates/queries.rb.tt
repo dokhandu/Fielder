@@ -1,0 +1,18 @@
+SELECT  prime_models.id                                  AS prime_model_id,
+        prime_models.name                                AS prime_model_name,
+        prime_models.code                                AS prime_model_code,
+        prime_model.modelable_id                         AS modelable_id,
+        prime_model.modelable_type                       AS modelable_type
+
+        field_models.id                                  AS field_model_id,
+        field_models.name                                AS field_model_name,
+        field_models.code                                AS field_model_code,
+
+        field_settings.id                                AS setting_id,
+        field_settings.rank                              AS setting_rank,
+        field_settings.display                           AS setting_display
+
+
+FROM prime_models
+        LEFT JOIN  field_models ON  field_models.prime_model_id = prime_models.id
+        LEFT JOIN  field_settings ON field_settings.field_model_id = field_models.id

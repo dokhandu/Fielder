@@ -1,6 +1,6 @@
 class CreatePrimeModel < ActiveRecord::Migration<%= migration_version %>
   def change
-    create_table :prime_models do |t|
+    create_table :prime_models, force: :cascade do |t|
       t.references :modelable, polymorphic: true, index: true
       t.string :name
       t.string :code
