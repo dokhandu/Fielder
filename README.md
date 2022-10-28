@@ -1,8 +1,7 @@
 # Fielder
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/Fielder`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Provides provision to Store and Customize the Query Fields Configurations for Client,
+###### Note: works only with ActiveRecords
 
 ## Installation
 
@@ -21,23 +20,109 @@ Or install it yourself as:
     $ gem install Fielder
 
 ## Usage
+1. Configuration
+ 
+    You can configure the fielder in two ways, i.e by enabling the read model and not enabling it:
+    ```ruby
+    Fielder.configure.enable_read = true # to enable read model
+    Fielder.configure.enable_read = false # normal mode
+   
+   # In block Format
+   Fielder.configure do |config|
+     config.enable_read = true
+   end
+   
+   # To read configuration
+   Fielder.configuration
 
-TODO: Write usage instructions here
+   ```
 
-## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+2. Generators
+   
+   The vital part of fielder is all about generators, it does it by generating all the  generic classes and module for you.
+   
+   To install:
+   ```ruby
+   rails g fielder:install
+   ```
+   This will generate all the migrations required for installing fielder, but does run the migration.
+   Do not run the migration yet.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+   Generate all the active record classes for accessing the fielder's objects:
+   ```ruby
+   rails g fielder:model
+   ```
+   
+   With Options:
+    ```ruby
+   rails g fielder:model --read-model
+   ```
+   Generates the fielder's model along with read model, make sure you have read model enabled inside your fielder's 
+   configurations.
+   
+   ###### Note: I recommend using reads only if you have huge database.
+   You can also generate read model separately:
+    ```ruby
+    rails g fielder:read_model
+    ```
+   For reads, fielder supports materialized view, leverages the features of a very popular gem call scenic, make sure you add
+    ```ruby
+    gem 'scenic'
+    ```
+   to you application Gemfile and bundle up. 
 
-## Contributing
+   Final step, run the migration:
+   
+   ```ruby
+    bundle exec rails db:migrate
+   ```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/Fielder. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/Fielder/blob/master/CODE_OF_CONDUCT.md).
+3. Read Model Set Up
+   
+   After the migration, you will need to set up the SQL query for you read models schema, i have left this choice completely for the users,
+   as there are multiple ways the read models can be formulated depending the on clients need. Following is  the recommended example:
+   
+   ```SQL
+   SELECT prime_models.id                                  AS prime_model_id,
+          prime_models.name                                AS prime_model_name,
+          prime_models.code                                AS prime_model_code,
+          prime_model.modelable_id                         AS modelable_id,
+          prime_model.modelable_type                       AS modelable_type
 
-## License
+          field_models.id                                  AS field_model_id,
+          field_models.name                                AS field_model_name,
+          field_models.code                                AS field_model_code,
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+          field_settings.id                                AS setting_id,
+          field_settings.rank                              AS setting_rank,
+          field_settings.display                           AS setting_display
 
-## Code of Conduct
 
-Everyone interacting in the Fielder project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/Fielder/blob/master/CODE_OF_CONDUCT.md).
+   FROM prime_models
+     LEFT JOIN  field_models ON  field_models.prime_model_id = prime_models.id
+     LEFT JOIN  field_settings ON field_settings.field_model_id = field_models.id
+   ```
+ 
+4. Refresh Read Model  
+   Fielder's read model generator will always generate read model which supports concurrent refresh(uniq index enabled for `setting_id`).
+   If you want to have this feature disabled:
+
+   ```ruby
+   # goto app/models/prime_model_list.rb and make concurrently: false, like following
+   
+
+   class PrimeModelList < ActiveRecord::Base
+       self.primary_key = :setting_id
+
+       def self.refresh
+         Scenic.database.refresh_materialized_view(table_name, concurrently: false, cascade: false)
+       end
+
+       def readonly?
+         true
+       end
+   end
+   
+   # or take it out, as the key argument as default false in scenic
+   ```
