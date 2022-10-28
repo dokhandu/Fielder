@@ -37,7 +37,6 @@ Or install it yourself as:
 
    ```
 
-
 2. Generators
    
    The vital part of fielder is all about generators, it does it by generating all the  generic classes and module for you.
@@ -46,7 +45,7 @@ Or install it yourself as:
    ```ruby
    rails g fielder:install
    ```
-   This will generate all the migrations required for installing fielder, but does run the migration.
+   This will generate all the migrations required for installing fielder, but does not run the migration.
    Do not run the migration yet.
 
    Generate all the active record classes for accessing the fielder's objects:
