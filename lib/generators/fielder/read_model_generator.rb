@@ -22,6 +22,7 @@ module Fielder
 
     private
 
+    # The reads will be configured with materialized views
     def mat_options
       { "skip_namespace" => false, "skip_collision_check" => false, "materialized" => true, "no_data" => false }
     end
