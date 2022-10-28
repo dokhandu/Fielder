@@ -123,5 +123,11 @@ Or install it yourself as:
        end
    end
    
-   # or take it out, as the key argument as default false in scenic
-   ```
+   # or just
+   Scenic.database.refresh_materialized_view(table_name, cascade: false)   
+   # as the key argument is false by default in scenic.
+   
+
+
+
+   
